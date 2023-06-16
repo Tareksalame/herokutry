@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yousef Barber Shop</title>
+    <link rel="icon" href="/IMG_3171.svg">
+    <link rel="stylesheet" href="homePage.css">
+</head>
+<body>
+    <header id="header">
+        <h1 style="margin-bottom: 0px;">Joe's Barbershop</h1>
+    </header>
+    <section id="logo">
+        <div id="logoDiv">
+            <img id="mylogo" src="/Logo.jpg" alt="">
+        </div>
+    </section>
+    <div id="welcomeDiv">
+        <h1 style="margin: 0px;">اهلًا</h1>
+    </div>
+    <section id="dateTime">
+        <input class="dateTime" onchange="times()" type="date" id="start" name="date"
+        min="2023-01-01" max="2070-12-31">
+        <!-- <div id="selectSubmit"> -->
+            <select class="dateTime" name="times" id="times">
+                
+            </select>
+            <button onclick="dateTime()" id="hajez">احجز</button>
+            
+        </section>
+        <div id="buttons">
+            <button id="submit">التسجيل</button>
+            <button onclick="myQueues()" id="myQueues">ادواري</button>
+        </div>
+        <footer>
+            <h4>By Tarek Salame </h4>
+            <button onclick="exit()" id="exit">X</button>
+            
+        </footer>
+        <script src="homePage.js"></script>
+</body>
+</html>
