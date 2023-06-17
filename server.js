@@ -2,11 +2,29 @@ const express = require('express')
 const app = express()
 const bp = require('body-parser')
 const db = require('mongoose')
+const fs = require('fs');
+const https =require('https')
+
+const cert = fs.readFileSync('./ssl/joebarber_shop.crt');
+const ca = fs.readFileSync('./ssl/joebarber_shop.ca-bundle');
+const key = fs.readFileSync('./ssl/joebarber_shop.p7b');
+
 
 app.use(express.static('pages'))
 app.use(bp.urlencoded({extended: false}));
 app.use(bp.json());
 db.connect('mongodb+srv://tareqsalame:Ilovesimba11@tarek.tskgvib.mongodb.net/barberShop');
+
+let options = {
+    cert: cert, // fs.readFileSync('./ssl/example.crt');
+    ca: ca, // fs.readFileSync('./ssl/example.ca-bundle');
+    key: key // fs.readFileSync('./ssl/example.key');
+ };
+ const httpsServer = https.createServer(options, (req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/html');
+    res.end("<h1>HTTPS server running</h1>");
+ });
 
 const costumerSchema = db.Schema({
     name:String,
@@ -139,5 +157,5 @@ app.post('/myQueues' , async(req,res)=>
     res.json(result)
 })
 
-
-app.listen(process.env.PORT || 2023, () => console.log('Server running on port', process.env.PORT || 2023));
+httpsServer.listen(443 , 'joebarber.shop')
+// app.listen(process.env.PORT || 2023, () => console.log('Server running on port', process.env.PORT || 2023));
