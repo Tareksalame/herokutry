@@ -15,24 +15,24 @@ app.use(bp.urlencoded({extended: false}));
 app.use(bp.json());
 db.connect('mongodb+srv://tareqsalame:Ilovesimba11@tarek.tskgvib.mongodb.net/barberShop');
 
-let options = {
-    cert: cert, // fs.readFileSync('./ssl/example.crt');
-    ca: ca, // fs.readFileSync('./ssl/example.ca-bundle');
-    key: key // fs.readFileSync('./ssl/example.key');
- };
- const httpsServer = https.createServer(options, (req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/html');
-    res.end("<h1>HTTPS server running</h1>");
- });
+// let options = {
+//     cert: cert, // fs.readFileSync('./ssl/example.crt');
+//     ca: ca, // fs.readFileSync('./ssl/example.ca-bundle');
+//     key: key // fs.readFileSync('./ssl/example.key');
+//  };
+//  const httpsServer = https.createServer(options, (req, res) => {
+//     res.statusCode = 200;
+//     res.setHeader('Content-Type', 'text/html');
+//     res.end("<h1>HTTPS server running</h1>");
+//  });
 
 const costumerSchema = db.Schema({
     name:String,
-    phoneNumber:Number,
+    phoneNumber:String,
 })
 const reservationSchema = db.Schema({
     name:String,
-    phoneNumber:Number,
+    phoneNumber:String,
     date:String,
     time:String
 })
@@ -81,7 +81,6 @@ app.post('/signup' , async(req,res)=>
     let name = req.body.name
     let phoneNumber = req.body.phoneNumber
     const result = await costumerModel.findOne({
-        name:name,
         phoneNumber:phoneNumber
     })
     // console.log(result)
@@ -157,5 +156,5 @@ app.post('/myQueues' , async(req,res)=>
     res.json(result)
 })
 
-httpsServer.listen(443 , 'joebarber.shop')
-// app.listen(process.env.PORT || 2023, () => console.log('Server running on port', process.env.PORT || 2023));
+// httpsServer.listen(443 , 'joebarber.shop')
+app.listen(process.env.PORT || 2023, () => console.log('Server running on port', process.env.PORT || 2023));

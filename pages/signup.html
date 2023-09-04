@@ -22,7 +22,7 @@
     <section id="input">
     <div id="inputDiv">
         <input id="name" placeholder="الاسم" class="signin" type="text">
-        <input id="phoneNumber" placeholder="رقم الهاتف" class="signin" type="number">
+        <input id="phoneNumber" placeholder="رقم الهاتف" class="signin" type="text">
         <button onclick="signup()" id="submit">التسجيل</button>
         <h4 id="have">عندك حساب ؟ </h4><a id="signup" href="/">اضغط هنا لتسجيل الدخول</a>
     </div>
@@ -30,9 +30,11 @@
     <div id="alert"></div>
     <br><br><br>
 
-    <footer>
-    <h4>By Tarek Salame </h4>
-    </footer>
+    <div class="hidden" onclick="website()" id="miniuDiv">
+        <!-- MINIU -->
+        <h3 id="design">Designed By</h3>
+        <img width="25%"  src="./MINI-U.svg" alt="">
+    </div>
     <script src="signup.js"></script>
 </body>
 </html>

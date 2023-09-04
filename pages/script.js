@@ -5,6 +5,22 @@ function removeAllChildNodes(parent) {
         parent.removeChild(parent.firstChild);
     }
 }
+
+const observer = new IntersectionObserver((entries)=>{
+    entries.forEach((entry)=>
+    {
+        if(entry.isIntersecting)
+        {
+            entry.target.classList.add('show')
+        }else
+        {
+            entry.target.classList.remove('show')
+        }
+    })
+});
+
+const hiddenElements = document.querySelectorAll('.hidden')
+hiddenElements.forEach((el)=>{observer.observe(el)})
 // let flag = false
 // let flags = ()=>
 // {
@@ -80,39 +96,42 @@ const signin = ()=>
 {
     let name = document.getElementById('name').value
     let phoneNumber = document.getElementById('phone').value
-    fetch('/',
-    {
-        headers:{
-            "Content-Type": "application/json"
-        },
-        method:'post',
-        body:JSON.stringify({
-            name: name,
-            phoneNumber:phoneNumber
-        })
-    }).then((res)=>{return res.json()}).then((data)=>
-    {
-        removeAllChildNodes(alert1)
-        let h4 = document.createElement('h4');
-        if(data == null)
-        {
-            
-                h4.innerHTML = "الاسم والرقم غير مسجلان"
-                h4.setAttribute('id','h4alert')
-                h4.style.color = 'red'
-                alert1.appendChild(h4)
-        }
-        else if (data.name == 'admin' && data.phoneNumber == 12345)
+    if (name == 'admin' && phoneNumber == 12345)
         {
             window.location.href = "/Admin";
         }
         else
         {
-            let costumer = JSON.stringify(data)
-            console.log(costumer)
-            localStorage.setItem("costumer",costumer)
-            window.location.href = "/barber";
+            fetch('/',
+            {
+                headers:{
+                    "Content-Type": "application/json"
+                },
+                method:'post',
+                body:JSON.stringify({
+                    name: name,
+                    phoneNumber:phoneNumber
+                })
+            }).then((res)=>{return res.json()}).then((data)=>
+            {
+                removeAllChildNodes(alert1)
+                let h4 = document.createElement('h4');
+                if(data == null)
+                {
+                    
+                        h4.innerHTML = "الاسم والرقم غير مسجلان"
+                        h4.setAttribute('id','h4alert')
+                        h4.style.color = 'red'
+                        alert1.appendChild(h4)
+                }
+                else
+                {
+                    let costumer = JSON.stringify(data)
+                    console.log(costumer)
+                    localStorage.setItem("costumer",costumer)
+                    window.location.href = "/barber";
+                }
+                
+            }).catch((err)=>{console.log('error')})
         }
-        
-    }).catch((err)=>{console.log('error')})
 }
