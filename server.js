@@ -4,6 +4,9 @@ const bp = require('body-parser')
 const db = require('mongoose')
 const fs = require('fs');
 const https =require('https')
+const path = require('path');
+require('dotenv').config();
+
 
 const cert = fs.readFileSync('./ssl/joebarber_shop.crt');
 const ca = fs.readFileSync('./ssl/joebarber_shop.ca-bundle');
@@ -13,6 +16,7 @@ const key = fs.readFileSync('./ssl/joebarber_shop.p7b');
 app.use(express.static('pages'))
 app.use(bp.urlencoded({extended: false}));
 app.use(bp.json());
+const nodemailer = require('nodemailer');
 db.connect('mongodb+srv://tareqsalame:Ilovesimba11@tarek.tskgvib.mongodb.net/barberShop');
 
 // let options = {
@@ -28,6 +32,7 @@ db.connect('mongodb+srv://tareqsalame:Ilovesimba11@tarek.tskgvib.mongodb.net/bar
 
 const costumerSchema = db.Schema({
     name:String,
+    email:String,
     phoneNumber:String,
 })
 const reservationSchema = db.Schema({
@@ -76,27 +81,96 @@ app.post('/' , async(req,res)=>
         res.json(result)
     }
 })
+
+const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: 'miniuforu@gmail.com',
+      pass: 'ebradgkyfidnmywd',
+    },
+  });
+  
+  const subject = 'Confirmation Email';
+  const emailBody = 'Hello, This is Your Confirmation Code : ';
+  
+
+
+// פונקציה לשליחת הודעת ברכה
+function sendWelcomeEmail(email,code) {
+    const mailOptions = {
+        from: 'miniuforu@gmail.com',
+        to: email,
+        subject: subject,
+        text: emailBody + code,
+      };
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log('Error sending email:', error);
+        } else {
+          console.log('Email sent:', info.response);
+        }
+      });
+      
+  }
+
+
+
 app.post('/signup' , async(req,res)=>
 {
+    const min = 99999;
+    const max = 999999;
+    const code = Math.floor(Math.random() * (max - min + 1)) + min;
+
     let name = req.body.name
+    let email = req.body.email
     let phoneNumber = req.body.phoneNumber
     const result = await costumerModel.findOne({
         phoneNumber:phoneNumber
     })
+    const emailresult = await costumerModel.findOne({
+        email:email
+    })
     // console.log(result)
     if(result == null)
     {
-        costumerModel.insertMany({
-            name:name,
-            phoneNumber:phoneNumber
-        })
-        res.json(result)
+        if(emailresult == null)
+        {
+            sendWelcomeEmail(email,code)
+            res.json(code)
+        }
+        else
+        {
+            res.json('email used')
+        }
+        // costumerModel.insertMany({
+        //     name:name,
+        //     phoneNumber:phoneNumber
+        // })
     }
     else
     {
-        res.json(result)
+        res.json(null)
     }
 })
+
+app.post('/register',async(req,res)=>
+{
+    let name = req.body.name
+    let email = req.body.email
+    let phoneNumber = req.body.phoneNumber
+    let result = await costumerModel.insertMany({
+            name:name,
+            email:email,
+            phoneNumber:phoneNumber
+        })
+
+        if(result)
+        {
+            res.json(true)
+        }
+})
+
+
 app.post('/deleted' , async(req,res)=>
 {
     let name = req.body.name
@@ -111,6 +185,11 @@ app.post('/deleted' , async(req,res)=>
     })
     // console.log(result)
     res.json(result)
+})
+app.get('/deleteAll' , async(req,res)=>
+{
+    let result = await costumerModel.deleteMany()
+    res.send(result)
 })
 app.post('/done', async(req,res)=>
 {
