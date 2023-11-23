@@ -77,14 +77,19 @@ footer
 }
 #exit
 {
-    font-size: 15px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50px;
-    border: 5px solid rgb(17, 16, 38); ;
-    color: whitesmoke;
-    background: rgb(17, 16, 38);
+    /* font-size: 15px; */
+    width: 50px;
+    height: 50px;
+    /* border-radius: 50px; */
+    /* border: 5px solid rgb(17, 16, 38); ; */
+    /* color: whitesmoke; */
+    border: none;
+    background: none;
 
+}
+#exitImg
+{
+    width: 100%;
 }
 #cancelButton
 {
