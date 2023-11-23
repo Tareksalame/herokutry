@@ -150,6 +150,8 @@ footer
 #exit
 {
     font-size: 20px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: 5px solid rgb(17, 16, 38); ;
     color: whitesmoke;
@@ -329,6 +331,7 @@ footer
 #exit
 {
     font-size: 20px;
+    
     border-radius: 50%;
     border: 5px solid rgb(17, 16, 38); ;
     color: whitesmoke;

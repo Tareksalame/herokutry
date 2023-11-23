@@ -118,7 +118,7 @@ function sendWelcomeEmail(email,code) {
         from: 'miniuforu@gmail.com',
         to: email,
         subject: 'Your Next Book',
-        text: 'You booked an appointment with Joe\'s Barber Shop on:' + date.date + '\n' + 'At : ' + date.time,
+        text: 'You booked an appointment with Joe\'s Barber Shop on : ' + date.date + '\n' + 'At : ' + date.time,
       };
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
