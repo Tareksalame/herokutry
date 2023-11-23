@@ -77,10 +77,10 @@ footer
 }
 #exit
 {
-    font-size: 20px;
+    font-size: 15px;
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+    border-radius: 50px;
     border: 5px solid rgb(17, 16, 38); ;
     color: whitesmoke;
     background: rgb(17, 16, 38);
