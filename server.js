@@ -113,6 +113,22 @@ function sendWelcomeEmail(email,code) {
       
   }
 
+  function sendRegisteration(email,date) {
+    const mailOptions = {
+        from: 'miniuforu@gmail.com',
+        to: email,
+        subject: 'Your Next Book',
+        text: 'You booked an appointment on :' + date.date + '\n' + 'At : ' + date.time,
+      };
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log('Error sending email:', error);
+        } else {
+          console.log('Email sent:', info.response);
+        }
+      });
+      
+  }
 
 
 app.post('/signup' , async(req,res)=>
@@ -194,9 +210,11 @@ app.get('/deleteAll' , async(req,res)=>
 app.post('/done', async(req,res)=>
 {
     let name = req.body.name
+    let email = req.body.email
     let phoneNumber = req.body.phoneNumber
     let date = req.body.date
     let time = req.body.time
+    let timeAndDate = {date:date,time:time}
     const result = await reservationModel.findOne({
         date : date,
         time : time
@@ -205,10 +223,12 @@ app.post('/done', async(req,res)=>
     {
         reservationModel.insertMany({
             name:name,
+            email:email,
             phoneNumber:phoneNumber,
             date:date,
             time:time
         })
+        sendRegisteration(email,timeAndDate)
         res.json(result)
     }
     else

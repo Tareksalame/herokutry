@@ -1,6 +1,7 @@
 const costumer =  localStorage.getItem("costumer");
 const parseCostumer = JSON.parse(costumer);
 
+console.log(parseCostumer);
 const welcomeDiv = document.getElementById('welcomeDiv');
 const costumerName = document.createElement('h1');
 costumerName.innerHTML = parseCostumer.name 
@@ -117,6 +118,7 @@ let dateTimeSection = document.getElementById('dateTime');
 const myQueues = ()=>
 {
     let name = parseCostumer.name
+    // let email = parseCostumer.email
     let phoneNumber = parseCostumer.phoneNumber
     fetch('/myQueues' , 
     {
@@ -126,6 +128,7 @@ const myQueues = ()=>
         method:'post',
         body:JSON.stringify({
             name:name,
+            // email:email,
             phoneNumber:phoneNumber
         })
     }).then((res)=>{return res.json()}).then((data)=>{
@@ -151,6 +154,7 @@ const dateTime = ()=>
     let time = document.getElementById('times').value;
 
     let name = parseCostumer.name
+    let email = parseCostumer.email
     let phoneNumber = parseCostumer.phoneNumber
         fetch('/done',
         {
@@ -160,6 +164,7 @@ const dateTime = ()=>
             method:'post',
             body:JSON.stringify({
                 name: name,
+                email : email,
                 phoneNumber:phoneNumber,
                 date:date,
                 time:time

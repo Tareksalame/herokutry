@@ -14,9 +14,6 @@ function removeAllChildNodes(parent) {
 
 const checkFunction = (dataCode,InputCode,information)=>
 {
-    console.log(dataCode)
-    console.log(InputCode)
-    console.log(information)
 
     if(dataCode == InputCode)
     {
@@ -127,33 +124,74 @@ const signup = ()=>
             else
             {
                 // removeAllChildNodes(inputDiv)
+                // ------------------------- Div Alert + Div Alert Style ------------------------ //
                 let divAlert = document.createElement('div');
                 divAlert.setAttribute('id','divAlertClass');
                 divAlert.style.position = 'absolute'
+                divAlert.style.boxShadow = '0 6px 10px rgba(0,0,0,.14), 0 1px'
                 divAlert.style.width = '300px'
-                divAlert.style.height = '300px'
+                divAlert.style.height = '350px'
                 divAlert.style.display = 'flex'
                 divAlert.style.flexDirection = 'column'
                 divAlert.style.justifyContent = 'center'
                 divAlert.style.alignItems = 'center'
-                divAlert.style.border = '3px solid black'
+                divAlert.style.border = '5px solid rgb(17, 16, 38)'
                 divAlert.style.borderRadius = '10px'
                 divAlert.style.background = 'white'
+                divAlert.style.animationName = 'animationAler'
+                divAlert.style.animationDuration = '2s'
+                // ---------------------Exit Button + Event + Style-------------------------//
                 let exit = document.createElement('button');
                 exit.innerHTML = 'X'
+                exit.style.border = '3px solid rgb(17, 16, 38)'
+                exit.style.background = 'none'
+                exit.style.color = 'rgb(17, 16, 38)'
+                exit.style.borderRadius = '50px'
+                exit.style.height = '40px'
+                exit.style.width = '40px'
+                exit.style.fontWeight = '900'
+                exit.style.fontSize = '20px'
                 exit.addEventListener('click', ()=>{divAlert.style.display = 'none'})
-                let title = document.createElement('h4');
-                title.innerHTML = ("Please Enter The Code That We Sent To Your Email")
+                // ---------------------Title Of The Alert Div -----------------------//
+                let title = document.createElement('h3');
+                title.innerHTML = ("A Code Has Been Sent to your Email")
+                // ---------------- Input Title---------------- //
+                let InputTitle = document.createElement('h4');
+                InputTitle.innerHTML = ("Enter the code :")
+                InputTitle.style.marginBottom = '0px'
+                // ------------------Input For Entering The Code -------------------//
                 let codeInput = document.createElement('input');
                 codeInput.setAttribute('id','codeInput')
+                codeInput.style.marginBottom = '30px'
+                codeInput.style.width = '220'
+                codeInput.style.height = '30px'
+                codeInput.style.fontSize = '18px'
+                codeInput.style.border = '3px solid rgb(17, 16, 38)'
+                codeInput.style.borderRadius = '10px'
+                codeInput.style.color = 'rgb(17, 16, 38)'
+                codeInput.style.fontWeight = '900'
+                codeInput.style.paddingLeft = '5px'
+                // codeInput.style
+                // codeInput.style
+                // -----------------Code Submit Button ----------------------//
                 let codeSubmit = document.createElement('button');
                 codeSubmit.innerHTML = 'Submit Code'
+                codeSubmit.style.backgroundColor = 'white';
+                codeSubmit.style.color = 'rgb(17, 16, 38)';
+                codeSubmit.style.fontWeight = '900'
+                codeSubmit.style.width = '150px'
+                codeSubmit.style.height = '40px'
+                codeSubmit.style.fontSize = '15px'
+                codeSubmit.style.borderRadius = '10px'
+                codeSubmit.style.border = '3px solid rgb(17, 16, 38)'
+                // -----------------------Div Alert Children Appending -----------------------//
                 divAlert.appendChild(exit)
                 divAlert.appendChild(title)
+                divAlert.appendChild(InputTitle)
                 divAlert.appendChild(codeInput)
                 divAlert.appendChild(codeSubmit)
                 inputDiv.appendChild(divAlert)
-                // InputCode = document.getElementById('codeInput').value
+                // -----------------------Event for Code Submitting ---------------------------//
                 codeSubmit.addEventListener('click' , ()=>{checkFunction(data,document.getElementById('codeInput').value,information)})
             }
         })
