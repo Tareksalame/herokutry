@@ -114,6 +114,23 @@ function sendWelcomeEmail(email,code) {
       
   }
 
+  function sendSignInInformation(email,name,phoneNumber) {
+    const mailOptions = {
+        from: 'miniuforu@gmail.com',
+        to: email,
+        subject: 'Sign In Informations',
+        text: 'You Have Been Registered Successfully and those are your Sign In informations :\n' + 'name: ' + name + '\n' + 'Phone Number: ' + phoneNumber + '\n' +'Please Add this email to your favorites so you can return to it when needed',
+      };
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log('Error sending email:', error);
+        } else {
+          console.log('Email sent:', info.response);
+        }
+      });
+      
+  }
+
   function sendRegisteration(email,date) {
     const mailOptions = {
         from: 'miniuforu@gmail.com',
@@ -141,7 +158,7 @@ app.post('/signup' , async(req,res)=>
     let name = req.body.name
     let email = req.body.email
     let phoneNumber = req.body.phoneNumber
-    console.log(name,email,phoneNumber);
+    // console.log(name,email,phoneNumber);
 
     const result = await costumerModel.findOne({
         phoneNumber:phoneNumber
@@ -177,7 +194,7 @@ app.post('/register',async(req,res)=>
     let name = req.body.name
     let email = req.body.email
     let phoneNumber = req.body.phoneNumber
-    console.log(name,email,phoneNumber);
+    // console.log(name,email,phoneNumber);
     let result = await costumerModel.insertMany({
             name:name,
             email:email,
@@ -186,6 +203,7 @@ app.post('/register',async(req,res)=>
 
         if(result)
         {
+            sendSignInInformation(email,name,phoneNumber)
             res.json(true)
         }
         else

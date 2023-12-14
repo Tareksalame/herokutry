@@ -109,8 +109,8 @@ const signin = ()=>
                 },
                 method:'post',
                 body:JSON.stringify({
-                    name: name,
-                    phoneNumber:phoneNumber
+                    name: name.toLowerCase(),
+                    phoneNumber:phoneNumber.toLowerCase()
                 })
             }).then((res)=>{return res.json()}).then((data)=>
             {
