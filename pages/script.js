@@ -96,7 +96,7 @@ const signin = ()=>
 {
     let name = document.getElementById('name').value
     let phoneNumber = document.getElementById('phone').value
-    if (name == 'admin' && phoneNumber == 12345)
+    if (name.toLowerCase() == 'admin' && phoneNumber == 12345)
         {
             window.location.href = "/Admin";
         }

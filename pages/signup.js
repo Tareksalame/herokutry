@@ -24,9 +24,9 @@ const checkFunction = (dataCode,InputCode,information)=>
             },
             method:'post',
             body:JSON.stringify({
-                name: information.name,
-                email:information.email,
-                phoneNumber:information.phoneNumber
+                name: information.name.toLowerCase(),
+                email: information.email.toLowerCase(),
+                phoneNumber: information.phoneNumber.toLowerCase()
             })
         }).then((res)=>{return res.json()}).then((data)=>
         {
@@ -99,9 +99,9 @@ const signup = ()=>
             },
             method:'post',
             body:JSON.stringify({
-                name: name,
-                email:email,
-                phoneNumber:phoneNumber
+                name: name.toLowerCase(),
+                email:email.toLowerCase(),
+                phoneNumber:phoneNumber.toLowerCase()
             })
         }).then((res)=>{return res.json()}).then((data)=>
         {

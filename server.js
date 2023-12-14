@@ -17,6 +17,7 @@ app.use(express.static('pages'))
 app.use(bp.urlencoded({extended: false}));
 app.use(bp.json());
 const nodemailer = require('nodemailer');
+const { log } = require('console');
 db.connect('mongodb+srv://tareqsalame:Ilovesimba11@tarek.tskgvib.mongodb.net/barberShop');
 
 // let options = {
@@ -140,6 +141,8 @@ app.post('/signup' , async(req,res)=>
     let name = req.body.name
     let email = req.body.email
     let phoneNumber = req.body.phoneNumber
+    console.log(name,email,phoneNumber);
+
     const result = await costumerModel.findOne({
         phoneNumber:phoneNumber
     })
@@ -174,6 +177,7 @@ app.post('/register',async(req,res)=>
     let name = req.body.name
     let email = req.body.email
     let phoneNumber = req.body.phoneNumber
+    console.log(name,email,phoneNumber);
     let result = await costumerModel.insertMany({
             name:name,
             email:email,
@@ -183,6 +187,10 @@ app.post('/register',async(req,res)=>
         if(result)
         {
             res.json(true)
+        }
+        else
+        {
+            res.json(false)
         }
 })
 
