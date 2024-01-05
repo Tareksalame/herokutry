@@ -7,7 +7,25 @@ body
                         ;
     grid-template-rows: 0.5fr 2fr 2fr ;
 }
-
+.LinksForTarekDiv
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+}
+.TarekLinksImages
+{
+    width: 100%;
+}
+.LinksForTarekDiv a
+{
+    justify-content: center;
+    align-items: center;
+    margin-left: 5%;
+    margin-right: 5%;
+}
 #header
 {
     grid-area: header;

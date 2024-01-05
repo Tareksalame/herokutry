@@ -8,7 +8,25 @@ body
                         ;
     grid-template-rows: 0.2fr 1fr 0.5fr 0.5fr ;
 }
-
+.LinksForTarekDiv
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+}
+.TarekLinksImages
+{
+    width: 100%;
+}
+.LinksForTarekDiv a
+{
+    justify-content: center;
+    align-items: center;
+    margin-left: 5%;
+    margin-right: 5%;
+}
 #header
 {
     grid-area: header;
@@ -149,8 +167,7 @@ footer
 #exit
 {
     /* font-size: 15px; */
-    width: 50px;
-    height: 50px;
+    width: 50%;
     /* border-radius: 50px; */
     /* border: 5px solid rgb(17, 16, 38); ; */
     /* color: whitesmoke; */
